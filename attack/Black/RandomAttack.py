@@ -70,7 +70,7 @@ class RandomAttack(ShillingAttackModel):
         for i in range(uNum):
             # fillerItemid = random.sample(set(range(self.itemNum)) - set(self.targetItem),
             #                              self.maliciousFeedbackNum - len(self.targetItem))
-            fillerItemid = random.sample(set(range(self.itemNum)) - set(self.targetItem),
+            fillerItemid = random.sample(list(set(range(self.itemNum)) - set(self.targetItem)),
                                 self.maliciousFeedbackNum)
             row += [i for r in range(len(fillerItemid + self.targetItem))]
             col += fillerItemid + self.targetItem
