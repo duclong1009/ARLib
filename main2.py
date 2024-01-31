@@ -1,6 +1,4 @@
 import time
-from conf.attack_parser import attack_parse_args
-from conf.recommend_parser import recommend_parse_args
 from util.DataLoader import DataLoader
 from util.tool import seedSet
 from ARLib import ARLib
@@ -8,23 +6,57 @@ import os
 import torch
 import numpy as np
 import random
+import yaml
 
+import argparse
 
+import argparse
+import os
+import json
+
+# declaringa a class
+class obj:
+     
+    # constructor
+    def __init__(self, dict1):
+        self.__dict__.update(dict1)
+        
+def dict2obj(dict1):
+     
+    # using json.loads method and passing json.dumps
+    # method and custom object hook as arguments
+    return json.loads(json.dumps(dict1), object_hook=obj)
+
+def load_config():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--config_path', type=str, default="")
+    args = parser.parse_args()
+    config_path = args.config_path
+    with open(config_path, 'r') as file:
+        config = yaml.safe_load(file)
+    rec_args = dict2obj(config['recommender'])
+    att_args = dict2obj(config['attacker'])
+    # breakpoint()
+    return rec_args, att_args
 if __name__ == '__main__':
 
     # 1. Load configuration
-    recommend_args = recommend_parse_args()
-    attack_args = attack_parse_args()
+    
+    recommend_args, attack_args = load_config()
+
     # 2. Import recommend model and attack model
-    os.environ['CUDA_VISIBLE_DEVICES'] = recommend_args.gpu_id
+    os.environ['CUDA_VISIBLE_DEVICES'] = str(recommend_args.gpu_id)
     seed = recommend_args.seed
     seedSet(seed)
-
+    
     import_str = 'from recommender.' + recommend_args.model_name + ' import ' + recommend_args.model_name
+    print(import_str)
     exec(import_str)
+    
     import_str = 'from attack.' + attack_args.attackCategory + "." + attack_args.attackModelName + ' import ' + attack_args.attackModelName
+    print(import_str)
     exec(import_str)
-
+    
     # 3. Load data
     data = DataLoader(recommend_args)
 
@@ -37,8 +69,8 @@ if __name__ == '__main__':
 
     # 5. Train and test in clean data (before attack)
     print("---- Train and test before attack")
-    # arlib.RecommendTrain()
-    # arlib.RecommendTest()
+    arlib.RecommendTrain()
+    arlib.RecommendTest()
     # 6. Attack
     # generate poison data, and then train/test in poisoning data (after attack)
     arlib.PoisonDataAttack()

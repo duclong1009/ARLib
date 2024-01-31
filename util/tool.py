@@ -87,9 +87,7 @@ def targetItemSelect(data, arg, popularThreshold=0.1):
             targetItem = random.sample(set(getPopularItemId(int(popularThreshold * itemNum))),
                                        targetNum)
         elif arg.attackTargetChooseWay == "unpopular":
-            targetItem = random.sample(
-                set(getReversePopularItemId(int(0.2 * itemNum))),
-                targetNum)
+            targetItem = random.sample(list(set(getReversePopularItemId(int(0.2 * itemNum)))),targetNum)
             # targetItem = random.sample(
             #     set(getReversePopularItemId(int((1 - popularThreshold) * itemNum))),
             #     targetNum)

@@ -80,14 +80,14 @@ class ARLib():
 
         # Basic information in logger file
         message = "\n" * 2 + "-" * 10 + "Recommend Model Infomation" + "-" * 10 + "\n"
-        for i in recommendArg._get_kwargs():
-            message += str(i[0]) + ":" + str(i[1]) + "\n"
+        for key in recommendArg.__dict__.keys():
+            message += str(key) + ":" + str(recommendArg.__dict__[key]) + "\n"
         self.logger.info(message)
         print(message)
 
         message = "\n" * 2 + "-" * 10 + "Attack Model Infomation" + "-" * 10 + "\n"
-        for i in attackArg._get_kwargs():
-            message += str(i[0]) + ":" + str(i[1]) + "\n"
+        for key in attackArg.__dict__.keys():
+            message += str(key) + ":" + str(attackArg.__dict__[key]) + "\n"
         self.logger.info(message)
         print(message)
 
