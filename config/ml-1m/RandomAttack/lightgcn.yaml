@@ -31,7 +31,7 @@ attacker:
   maliciousUserSize: 0.01
   maliciousFeedbackSize: 0
 
-  Epoch: 5
+  Epoch: 30
   innerEpoch: 6
   outerEpoch: 2
   gradMaxLimitation: 1
