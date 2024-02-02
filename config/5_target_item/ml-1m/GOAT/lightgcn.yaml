@@ -1,11 +1,11 @@
 recommender:
-  dataset: "Beauty"
+  dataset: "ml-1M"
   data_path: "data/clean/"
   training_data: "/train.txt"
   val_data: "/val.txt"
   test_data: "/test.txt"
 
-  model_name: "NGCF"
+  model_name: "LightGCN"
   maxEpoch: 30
   batch_size: 2048
   emb_size: 64
@@ -23,15 +23,15 @@ recommender:
   save_dir: "./modelsaved/"
 
 attacker:
-  attackCategory: "Black"
-  attackModelName: "PoisonRec"
+  attackCategory: "Gray"
+  attackModelName: "GOAT"
   times: 5
   poisonDatasetOutPath: "data/poison"
   poisondataSaveFlag: False
   maliciousUserSize: 0.01
   maliciousFeedbackSize: 0
 
-  Epoch: 30
+  Epoch: 5
   innerEpoch: 6
   outerEpoch: 2
   gradMaxLimitation: 1

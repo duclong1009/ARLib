@@ -1,0 +1,41 @@
+recommender:
+  dataset: "douban"
+  data_path: "data/clean/"
+  training_data: "/train.txt"
+  val_data: "/val.txt"
+  test_data: "/test.txt"
+
+  model_name: "LightGCN"
+  maxEpoch: 30
+  batch_size: 2048
+  emb_size: 64
+  n_layers: 2
+  reg: 0.0001
+  lRate: 0.005
+  dropout: True
+  dropout_rate: 0.3
+  cuda: True
+  gpu_id: 0
+  seed: 2018
+  topK: "50"
+  load: True
+  save: True
+  save_dir: "./modelsaved/"
+
+attacker:
+  attackCategory: "Gray"
+  attackModelName: "AUSH"
+  times: 5
+  poisonDatasetOutPath: "data/poison"
+  poisondataSaveFlag: False
+  maliciousUserSize: 0.01
+  maliciousFeedbackSize: 0
+
+  Epoch: 5
+  innerEpoch: 6
+  outerEpoch: 2
+  gradMaxLimitation: 1
+  gradNumLimitation: 60
+  gradIterationNum: 10
+  attackTargetChooseWay: "unpopular"
+  targetSize: 5

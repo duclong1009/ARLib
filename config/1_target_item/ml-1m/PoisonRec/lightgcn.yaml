@@ -24,19 +24,19 @@ recommender:
 
 attacker:
   attackCategory: 'Black'
-  attackModelName: 'RandomAttack'
+  attackModelName: 'PoisonRec'
   times: 5
   poisonDatasetOutPath: 'data/poison'
   poisondataSaveFlag: False
   maliciousUserSize: 0.01
   maliciousFeedbackSize: 0
 
-  Epoch: 30
+  Epoch: 5
   innerEpoch: 6
   outerEpoch: 2
   gradMaxLimitation: 1
   gradNumLimitation: 60
   gradIterationNum: 10
   attackTargetChooseWay: 'unpopular'
-  targetSize: 5
+  targetSize: 1
 
